@@ -49,7 +49,7 @@
                                                 <div class="alert alert-danger">
                                                     You cannot update a product that does not exist!
                                                 </div>
-                                                <a class="btn btn-success" href="/admin/product">Back</a>
+                                                <a class="btn btn-success" href="/admin/user">Back</a>
                                             </c:if>
                                             <c:if test="${empty message}">
                                                 <h3>Update a user</h3>
@@ -109,8 +109,8 @@
                                                             id="avatarFile" accept=".png, .jpg, .jpeg" />
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <img src="${user.avatar}" style="max-height: 250px"
-                                                            class="${empty user.avatar ? 'd-none' : ''}"
+                                                        <img src="${user.avatarUrl}" style="max-height: 250px"
+                                                            class="${empty user.avatarUrl ? 'd-none' : ''}"
                                                             alt="avatar preview" id="avatarPreview" />
                                                     </div>
                                                     <div class="col-md-12">

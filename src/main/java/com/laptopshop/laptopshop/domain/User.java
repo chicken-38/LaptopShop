@@ -9,9 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -23,11 +24,10 @@ public class User {
     private long id;
     @Email(message = "The email is not valid.", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
-    @Size(min = 6, message = "Password must be at least 6 characters.")
+    // @StrongPassword
     private String password;
     @Size(min = 3, message = "Full name must be at least 3 characters.")
     private String fullName;
-    @NotBlank(message = "The address field is required.")
     private String address;
     @Pattern(regexp = "^0\\d{9}$", message = "The phone number is not valid.")
     private String phone;
@@ -40,11 +40,25 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    @Transient
+    private String avatarUrl;
+
     public User() {
     }
 
     public User(String email, String password, String fullName, String address, String phone, String avatar,
-            Role role) {
+            Role role, String avatarUrl) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -52,6 +66,7 @@ public class User {
         this.phone = phone;
         this.avatar = avatar;
         this.role = role;
+        this.avatarUrl = avatarUrl;
     }
 
     public long getId() {
@@ -126,10 +141,19 @@ public class User {
         this.orders = orders;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + ", role=" + role + "]";
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + ", role=" + role + ", orders="
+                + orders + ", avatarUrl=" + avatarUrl + "]";
     }
 
 }

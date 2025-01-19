@@ -43,7 +43,7 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <img src="${user.avatar}"
+                                                    <img src="${user.avatarUrl}"
                                                         class="object-fit-md-contain border rounded w-100 h-100 " />
                                                 </div>
                                                 <div class=" col-md-8">

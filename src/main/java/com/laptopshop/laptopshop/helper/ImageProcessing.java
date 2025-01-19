@@ -7,6 +7,7 @@ import com.laptopshop.laptopshop.controller.fileProcessing.ImageProcessingContro
 
 @Component
 public class ImageProcessing {
+
     public String getUrl(String fileName) {
         if (fileName == null || fileName.length() == 0) {
             fileName = "chicken_logo.png";
@@ -15,4 +16,5 @@ public class ImageProcessing {
                 .build()
                 .toUri().toString();
     }
+
 }
